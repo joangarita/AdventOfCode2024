@@ -16,7 +16,7 @@ public class Utils {
         }
     }
 
-    private static List<List<Integer>> transformToInt(List<List<String>> data){
+    private static List<List<Integer>> transformToInt(List<List<String>> data) {
         return data.stream()
                 .map(l -> l.stream().map(Integer::valueOf).toList())
                 .toList();
@@ -25,4 +25,13 @@ public class Utils {
     public static List<List<Integer>> readIntegersFromCsv(String path) throws IOException {
         return transformToInt(readCsvFile(path));
     }
+
+    public static String extractFullTxt(String path) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        try (Stream<String> lines = Files.lines(Paths.get(path))) {
+            lines.forEach(sb::append);
+        }
+        return sb.toString();
+    }
+
 }
