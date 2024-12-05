@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 public class Utils {
@@ -14,6 +15,21 @@ public class Utils {
             return lines.map(line -> Arrays.asList(line.split(COMMA_DELIMITER)))
                     .toList();
         }
+    }
+
+    public static char[][] readFile(String path) throws IOException {
+        try (Stream<String> lines = Files.lines(Paths.get(path))) {
+            List<char[]> txtList = lines.map(String::toCharArray)
+                    .toList();
+            int columnCount = txtList.get(0).length;
+            int rowCount = txtList.size();
+            char[][] fileArr = new char[rowCount][columnCount];
+            for (int i = 0; i < rowCount; i++) {
+                System.arraycopy(txtList.get(i), 0, fileArr[i], 0, columnCount);
+            }
+            return fileArr;
+        }
+
     }
 
     private static List<List<Integer>> transformToInt(List<List<String>> data) {
@@ -32,6 +48,15 @@ public class Utils {
             lines.forEach(sb::append);
         }
         return sb.toString();
+    }
+
+    public static void print2DArr(char[][] arr) {
+        for (char[] line : arr) {
+            for (char c : line) {
+                System.out.print(c);
+            }
+            System.out.print("\n");
+        }
     }
 
 }
