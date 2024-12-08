@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 public class Day6 {
@@ -39,9 +40,7 @@ public class Day6 {
     private static char[][] copyGrid(char[][] grid) {
         char[][] copy = new char[grid.length][grid[0].length];
         for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                copy[i][j] = grid[i][j];
-            }
+            copy[i] = Arrays.copyOf(grid[i], grid[i].length);
         }
         return copy;
     }
