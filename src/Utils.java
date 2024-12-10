@@ -1,3 +1,5 @@
+import utils.Coordinate;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -50,12 +52,32 @@ public class Utils {
     }
 
     public static void print2DArr(char[][] arr) {
+        System.out.println("*******************");
+        System.out.println("\n");
         for (char[] line : arr) {
             for (char c : line) {
                 System.out.print(c);
             }
             System.out.print("\n");
         }
+        System.out.println("\n");
     }
+
+    public static char[][] copyGrid(char[][] grid) {
+        char[][] copy = new char[grid.length][grid[0].length];
+        for (int i = 0; i < grid.length; i++) {
+            copy[i] = Arrays.copyOf(grid[i], grid[i].length);
+        }
+        return copy;
+    }
+    public static boolean inBounds(int i, int size) {
+        return i >= 0 && i < size;
+    }
+    public static boolean inBounds(Coordinate coordinate, int xSize, int ySize) {
+        return (coordinate.x >= 0 && coordinate.x < xSize) &&
+                (coordinate.y >= 0 && coordinate.y < ySize) ;
+    }
+
+
 
 }

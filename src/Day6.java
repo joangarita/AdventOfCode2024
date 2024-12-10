@@ -12,7 +12,7 @@ public class Day6 {
         int xSize = grid.length;
         int ySize = grid[0].length;
 
-        char[][] firstTraversalGrid = copyGrid(grid);
+        char[][] firstTraversalGrid = Utils.copyGrid(grid);
         int posVisited = processRoute(firstTraversalGrid);
 
         System.out.println("Part 1: " +posVisited);
@@ -22,7 +22,7 @@ public class Day6 {
         for (int i = 0; i < xSize; i++) {
             for (int j = 0; j < ySize; j++) {
                 if(List.of('-', '|', '+').contains(firstTraversalGrid[i][j]) && grid[i][j] == '.'){
-                    char[][] copy = copyGrid(grid);
+                    char[][] copy = Utils.copyGrid(grid);
                     copy[i][j] = '#';
                     int count = processRoute(copy);
                     if(count == -1){
@@ -35,14 +35,6 @@ public class Day6 {
 
         System.out.println("Part 2: " + infiniteLoops);
 
-    }
-
-    private static char[][] copyGrid(char[][] grid) {
-        char[][] copy = new char[grid.length][grid[0].length];
-        for (int i = 0; i < grid.length; i++) {
-            copy[i] = Arrays.copyOf(grid[i], grid[i].length);
-        }
-        return copy;
     }
 
     private static int processRoute(char[][] grid) {
